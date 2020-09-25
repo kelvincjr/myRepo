@@ -4,7 +4,7 @@
 import torch
 import numpy as np
 from loguru import logger
-import onnxruntime
+#import onnxruntime
 
 from .trainer import generate_dataloader
 from ..utils.progbar import Progbar
