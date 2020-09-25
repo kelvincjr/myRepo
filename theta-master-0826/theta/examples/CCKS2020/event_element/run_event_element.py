@@ -5,7 +5,7 @@ import os, sys, json, random, copy, re
 from tqdm import tqdm
 from loguru import logger
 from pathlib import Path
-import mlflow
+#import mlflow
 from collections import Counter, defaultdict
 
 from theta.utils import load_json_file, split_train_eval_examples
@@ -874,7 +874,7 @@ def main(args):
 
         elif args.do_predict:
             do_predict(args)
-
+        '''
         elif args.do_experiment:
             if args.tracking_uri:
                 mlflow.set_tracking_uri(args.tracking_uri)
@@ -891,7 +891,7 @@ def main(args):
 
                 # ----- Submit -----
                 do_submit(args)
-
+        '''
 
 if __name__ == '__main__':
 

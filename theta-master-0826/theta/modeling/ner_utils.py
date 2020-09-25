@@ -7,7 +7,7 @@ from loguru import logger
 from theta.utils import seg_generator
 from dataclasses import dataclass, field
 from typing import List
-import mlflow
+#import mlflow
 
 # ----------------------
 # 实体标注规范
