@@ -6,7 +6,7 @@ from tqdm import tqdm
 from loguru import logger
 from theta.utils import seg_generator
 from dataclasses import dataclass, field
-import mlflow
+#import mlflow
 
 from ..utils import seg_generator
 
