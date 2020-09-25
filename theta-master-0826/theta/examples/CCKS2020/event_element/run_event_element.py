@@ -775,7 +775,7 @@ experiment_params = NerAppParams(
         model_type="bert",
         model_path=
         #  "/opt/share/pretrained/pytorch/hfl/chinese-electra-large-discriminator",
-        "/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese",
+        "/kaggle/working",
         #  "/opt/share/pretrained/pytorch/bert-base-chinese",
         fp16=True,
         best_index="f1",
