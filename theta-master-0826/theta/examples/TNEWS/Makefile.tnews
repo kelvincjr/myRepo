@@ -1,0 +1,84 @@
+DATASET_NAME=tnews
+DATA_DIR=./data
+
+FOLD=0
+OUTPUT_DIR=output_${DATASET_NAME}
+CHECKPOINT_MODEL=${OUTPUT_DIR}/best_fold${FOLD}
+TRAIN_FILE=${DATA_DIR}/rawdata/train.json
+EVAL_FILE=${DATA_DIR}/rawdata/dev.json
+TEST_FILE=${DATA_DIR}/rawdata/test.json
+
+EPOCHS=10
+MODEL_TYPE=bert
+PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+LEARNING_RATE=2e-5
+TRAIN_MAX_SEQ_LENGTH=160
+EVAL_MAX_SEQ_LENGTH=160
+TRAIN_BATCH_SIZE=64
+EVAL_BATCH_SIZE=64
+PREDICT_BATCH_SIZE=64
+TRAIN_RATE=0.9
+LOSS_TYPE=CrossEntropyLoss
+# LOSS_TYPE=FocalLoss
+FOCALLOSS_GAMMA=1.5
+ADDITIONAL_OPTS="--enable_kd"
+
+train:
+	python run_${DATASET_NAME}.py \
+		--do_train \
+		--train_max_seq_length ${TRAIN_MAX_SEQ_LENGTH} \
+		--num_train_epochs ${EPOCHS} \
+		--train_rate ${TRAIN_RATE} \
+		--learning_rate ${LEARNING_RATE} \
+		--per_gpu_train_batch_size ${TRAIN_BATCH_SIZE} \
+		--per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--fold ${FOLD} \
+		--train_file ${TRAIN_FILE} \
+		--output_dir ${OUTPUT_DIR} \
+		--model_type ${MODEL_TYPE} \
+		--model_path ${PRETRAINED_MODEL} \
+		--loss_type ${LOSS_TYPE} \
+		--focalloss_gamma ${FOCALLOSS_GAMMA} \
+		--cache_features \
+		--overwrite_cache \
+		${ADDITIONAL_OPTS}
+
+eval:
+	python run_${DATASET_NAME}.py \
+		--do_eval \
+		--learning_rate ${LEARNING_RATE} \
+		--eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--fold ${FOLD} \
+		--eval_file ${EVAL_FILE} \
+		--output_dir ${OUTPUT_DIR} \
+		--model_type ${MODEL_TYPE} \
+		--model_path ${CHECKPOINT_MODEL} \
+		--per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+		--cache_features 
+predict:
+	python run_${DATASET_NAME}.py \
+		--do_predict \
+		--learning_rate ${LEARNING_RATE} \
+		--eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+		--per_gpu_predict_batch_size ${PREDICT_BATCH_SIZE} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--fold ${FOLD} \
+		--test_file ${TEST_FILE} \
+		--output_dir ${OUTPUT_DIR} \
+		--model_type ${MODEL_TYPE} \
+		--model_path ${CHECKPOINT_MODEL} \
+
+eda:
+	python run_${DATASET_NAME}.py \
+		--do_eda \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--train_file ${TRAIN_FILE} \
+		--test_file ${TEST_FILE} \
+		--output_dir ${OUTPUT_DIR} \
+

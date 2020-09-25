@@ -1,0 +1,111 @@
+DATASET_NAME=cluener
+DATA_DIR=./data
+
+#NER_TYPE=crf
+NER_TYPE=span
+
+FOLD=0
+OUTPUT_DIR=output_${DATASET_NAME}
+CHECKPOINT_MODEL=${OUTPUT_DIR}/best_fold${FOLD}
+TRAIN_FILE=${DATA_DIR}/rawdata/train.json
+EVAL_FILE=${DATA_DIR}/rawdata/dev.json
+TEST_FILE=${DATA_DIR}/rawdata/test.json
+
+
+MODEL_TYPE=bert
+PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+
+EPOCHS=3
+LEARNING_RATE=2e-5
+TRAIN_MAX_SEQ_LENGTH=256
+EVAL_MAX_SEQ_LENGTH=256
+MODEL_TYPE=bert
+TRAIN_BATCH_SIZE=12
+EVAL_BATCH_SIZE=12
+SEG_LEN=254
+SEG_BACKOFF=64
+PREDICT_BATCH_SIZE=12
+NUM_AUGEMENTS = 0
+
+# ADDITIONAL_OPTS=--enable_kd
+ADDITIONAL_OPTS=
+
+
+train:
+	NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+		--do_train \
+		--train_max_seq_length ${TRAIN_MAX_SEQ_LENGTH} \
+		--num_train_epochs ${EPOCHS} \
+		--learning_rate ${LEARNING_RATE} \
+		--per_gpu_train_batch_size ${TRAIN_BATCH_SIZE} \
+		--per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--train_file ${TRAIN_FILE} \
+		--eval_file ${EVAL_FILE} \
+		--seg_len ${SEG_LEN} \
+		--seg_backoff ${SEG_BACKOFF} \
+		--num_augements ${NUM_AUGEMENTS} \
+		--fold ${FOLD} \
+		--output_dir ${OUTPUT_DIR} \
+		--model_type ${MODEL_TYPE} \
+		--model_path ${PRETRAINED_MODEL} \
+		--fp16 \
+        --do_lower_case \
+		--overwrite_cache \
+        ${ADDITIONAL_OPTS}
+
+eval:
+	NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+		--do_eval \
+		--eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--eval_file ${EVAL_FILE} \
+		--seg_len ${SEG_LEN} \
+		--seg_backoff ${SEG_BACKOFF} \
+		--fold ${FOLD} \
+		--output_dir ${OUTPUT_DIR} \
+		--model_type ${MODEL_TYPE} \
+		--model_path ${CHECKPOINT_MODEL} \
+		--per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+		--fp16 \
+        --do_lower_case \
+		--overwrite_cache
+
+predict:
+	NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+		--do_predict \
+		--eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+		--per_gpu_predict_batch_size ${PREDICT_BATCH_SIZE} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--test_file ${TEST_FILE} \
+		--seg_len ${SEG_LEN} \
+		--seg_backoff ${SEG_BACKOFF} \
+		--output_dir ${OUTPUT_DIR} \
+		--model_type ${MODEL_TYPE} \
+		--model_path ${CHECKPOINT_MODEL} \
+		--fp16 \
+        --do_lower_case \
+		--overwrite_cache
+eda:
+	NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+		--do_eda \
+		--train_max_seq_length ${TRAIN_MAX_SEQ_LENGTH} \
+		--num_train_epochs ${EPOCHS} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--train_file ${TRAIN_FILE} \
+		--test_file ${TEST_FILE} \
+		--eval_file ${EVAL_FILE} \
+		--fold ${FOLD} \
+		--output_dir ${OUTPUT_DIR} \
+		--fp16 \
+		--overwrite_cache
+
+submission:
+	NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+		--generate_submission \
+		--dataset_name ${DATASET_NAME} \
+		--output_dir ${OUTPUT_DIR} \

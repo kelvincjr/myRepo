@@ -1,0 +1,169 @@
+DATASET_NAME=event_element
+DATA_DIR=./data
+
+OUTPUT_DIR=output_${DATASET_NAME}
+CHECKPOINT_MODEL=${OUTPUT_DIR}/best
+# TRAIN_FILE=${DATA_DIR}/${DATASET_NAME}_train.bios
+# EVAL_FILE=${DATA_DIR}/${DATASET_NAME}_eval.bios
+# TEST_FILE=${DATA_DIR}/${DATASET_NAME}_test.bios
+
+EPOCHS=10
+LEARNING_RATE=2e-5
+TRAIN_MAX_SEQ_LENGTH=512
+EVAL_MAX_SEQ_LENGTH=512
+MODEL_TYPE=bert
+TRAIN_BATCH_SIZE=12
+EVAL_BATCH_SIZE=12
+PREDICT_BATCH_SIZE=12
+
+# dev f1: 0.7707
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+
+# dev f1: 0.8548
+# PRETRAINED_MODEL = '/opt/share/pretrained/pytorch/bert-wwm-ext-chinese'
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# TRAIN_BATCH_SIZE=16
+# EVAL_BATCH_SIZE=16
+
+# def f1: 0.8848
+# online f1: 0.73205
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# TRAIN_BATCH_SIZE=4
+# EVAL_BATCH_SIZE=4
+
+# new dev f1: 0.8589 
+# online f1: 0.70734
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+# TRAIN_BATCH_SIZE=6
+# EVAL_BATCH_SIZE=6
+
+# dev f1: 0.8824
+# online f1: 0.730386
+# TorchNER no crf loss
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# TRAIN_BATCH_SIZE=4
+# EVAL_BATCH_SIZE=4
+
+# def f1: 0.8734
+# bert-base torchcrf loss
+#
+
+
+# ncrfpp +loss
+# dev f1: 0.66578
+# online f1: 0.650006
+# EPOCHS=5
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# TRAIN_MAX_SEQ_LENGTH=128
+# EVAL_MAX_SEQ_LENGTH=128
+# TRAIN_BATCH_SIZE=16
+# EVAL_BATCH_SIZE=16
+#
+
+
+# new CRF
+# dev f1: 0.8789
+# oneline f1: 0.728845
+# EPOCHS=10
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# TRAIN_MAX_SEQ_LENGTH=512
+# EVAL_MAX_SEQ_LENGTH=512
+# TRAIN_BATCH_SIZE=4
+# EVAL_BATCH_SIZE=4
+
+# old CRF with ncrfpp decode
+# dev f1: 0.8769
+# online f1: 0.741167
+# EPOCHS=10
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# TRAIN_MAX_SEQ_LENGTH=512
+# EVAL_MAX_SEQ_LENGTH=512
+# TRAIN_BATCH_SIZE=4
+# EVAL_BATCH_SIZE=4
+
+# NCRFPP no loss
+# dev f1: 0.8789
+EPOCHS=10
+PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+TRAIN_MAX_SEQ_LENGTH=512
+EVAL_MAX_SEQ_LENGTH=512
+TRAIN_BATCH_SIZE=4
+EVAL_BATCH_SIZE=4
+
+# NCRFPP withloss
+# # dev f1: 0.8970
+EPOCHS=10
+PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+TRAIN_MAX_SEQ_LENGTH=512
+EVAL_MAX_SEQ_LENGTH=512
+TRAIN_BATCH_SIZE=4
+EVAL_BATCH_SIZE=4
+
+# @gpu.huawei
+EPOCHS=10
+PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+TRAIN_MAX_SEQ_LENGTH=512
+EVAL_MAX_SEQ_LENGTH=512
+TRAIN_BATCH_SIZE=4
+EVAL_BATCH_SIZE=4
+
+# @gpu2.yirong
+EPOCHS=10
+PRETRAINED_MODEL=/opt/share/pretrained/pytorch/hfl/chinese-roberta-wwm-ext
+TRAIN_MAX_SEQ_LENGTH=130
+EVAL_MAX_SEQ_LENGTH=130
+TRAIN_BATCH_SIZE=16
+EVAL_BATCH_SIZE=16
+
+# @gpu1.yirong
+EPOCHS=10
+PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+TRAIN_MAX_SEQ_LENGTH=512
+EVAL_MAX_SEQ_LENGTH=512
+TRAIN_BATCH_SIZE=4
+EVAL_BATCH_SIZE=4
+
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-tiny-clue-chinese
+# PRETRAINED_MODEL=voidful/albert_chinese_small
+train:
+	python run_${DATASET_NAME}.py \
+		--do_train \
+		--train_max_seq_length ${TRAIN_MAX_SEQ_LENGTH} \
+		--num_train_epochs ${EPOCHS} \
+		--learning_rate ${LEARNING_RATE} \
+		--per_gpu_train_batch_size ${TRAIN_BATCH_SIZE} \
+		--per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--output_dir ${OUTPUT_DIR} \
+		--model_type ${MODEL_TYPE} \
+		--model_path ${PRETRAINED_MODEL} \
+		--soft_label \
+		--overwrite_cache
+
+eval:
+	python run_${DATASET_NAME}.py \
+		--do_eval \
+		--eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+		--per_gpu_predict_batch_size ${PREDICT_BATCH_SIZE} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--output_dir ${OUTPUT_DIR} \
+		--model_type ${MODEL_TYPE} \
+		--model_path ${CHECKPOINT_MODEL} \
+		--per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+		--soft_label \
+		--overwrite_cache
+
+predict:
+	python run_${DATASET_NAME}.py \
+		--do_predict \
+		--eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+		--per_gpu_predict_batch_size ${PREDICT_BATCH_SIZE} \
+		--data_dir ${DATA_DIR} \
+		--dataset_name ${DATASET_NAME} \
+		--output_dir ${OUTPUT_DIR} \
+		--model_type ${MODEL_TYPE} \
+		--model_path ${CHECKPOINT_MODEL} \
+		--soft_label \
+		--overwrite_cache

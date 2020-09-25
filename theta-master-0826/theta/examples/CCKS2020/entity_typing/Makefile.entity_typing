@@ -1,0 +1,311 @@
+DATASET_NAME=entity_typing
+all:
+	python run_${DATASET_NAME}.py \
+		--do_experiment \
+
+train:
+	python run_${DATASET_NAME}.py \
+		--do_train \
+
+eval:
+	python run_${DATASET_NAME}.py \
+		--do_eval \
+
+predict:
+	python run_${DATASET_NAME}.py \
+		--do_predict \
+
+eda:
+	python run_${DATASET_NAME}.py \
+		--do_eda \
+
+submit:
+	python run_${DATASET_NAME}.py \
+		--do_submit \
+
+# DATASET_NAME=entity_typing
+# DATA_DIR=./data
+#
+# FOLD=0
+# OUTPUT_DIR=outputs
+# CHECKPOINT_MODEL=${OUTPUT_DIR}/best_fold${FOLD}
+# TRAIN_FILE=${DATA_DIR}/rawdata/ccks_7_1_competition_data/entity_type.txt
+# TEST_FILE=${DATA_DIR}/rawdata/ccks_7_1_competition_data/entity_validation.txt
+#
+# # ------------------------------------------------------
+#
+# # # dev: 0.78781 online: 0.69175
+# # EPOCHS=10
+# # LEARNING_RATE=2e-5
+# # TRAIN_MAX_SEQ_LENGTH=64
+# # EVAL_MAX_SEQ_LENGTH=64
+# # MODEL_TYPE=bert
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+# # # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-tiny-clue-chinese
+# # # PRETRAINED_MODEL=clue/roberta_chinese_clue_tiny
+# # # PRETRAINED_MODEL=voidful/albert_chinese_small
+# # TRAIN_BATCH_SIZE=64
+# # EVAL_BATCH_SIZE=64
+#
+# # EPOCHS=10
+# # LEARNING_RATE=1e-6
+# # TRAIN_MAX_SEQ_LENGTH=32
+# # EVAL_MAX_SEQ_LENGTH=32
+# # MODEL_TYPE=bert
+# # TRAIN_RATE=0.9
+#
+# # dev f1: 0.92215 (5/10)
+# # online f1: 0.92980
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=2e-5
+#
+# # dev f1: 0.9301 (10/10)
+# # online f1: 0.93075
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=1e-5
+#
+# # with_focalloss
+# # dev f1: 0.9263 (6/10) gamma=3.5
+# # dev f1: 0.9334 (8/10) gamma=3.0
+# # dev f1: 0.9308 (10/10) gamma=2.5
+# # dev f1: 0.9328 (5/10) gamma=2.0
+# # dev f1: 0.9370 (9/10) gamma=1.5 online f1: 0.93130
+# # dev f1: 0.9269 (9/10) gamma=1.0
+# #
+# #
+#
+# # online f1:0.93155  dev f1: 0.9203
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=1e-5
+#
+# # online f1: 0.93125 dev f1: 0.9216
+# # LOSS_TYPE=FocalLoss
+# # FOCALLOSS_GAMMA=1.5
+#
+# # dev f1: 0.9640
+# # online f1: 0.921596
+# # FOLD = 0
+# #
+# # dev f1:  0.9796
+# # FOLD = 1
+# #
+# # dev f1: 0.8724
+# # online f1: 0.926946
+# # FOLD = 2
+# #
+# # dev f1: 0.9626
+# # FOLD = 3
+#
+# # dev f1:
+# # FOLD = 9
+# #
+# #
+#
+# # Enable knowledge distillation
+# # online f1: 0.93720 (CrossEntropyLoss) 0.93685 (FocalLoss)
+# FOLD=0
+# MODEL_TYPE=bert
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# LEARNING_RATE=1e-5
+# TRAIN_MAX_SEQ_LENGTH=32
+# EVAL_MAX_SEQ_LENGTH=32
+# TRAIN_BATCH_SIZE=128
+# EVAL_BATCH_SIZE=128
+# PREDICT_BATCH_SIZE=128
+# TRAIN_RATE=0.9
+# LOSS_TYPE=CrossEntropyLoss
+# # LOSS_TYPE=FocalLoss
+# FOCALLOSS_GAMMA=1.5
+# TRAIN_RATE=0.9
+# EPOCHS=10
+# ADDITIONAL_OPTS=--enable_kd
+# # ADDITIONAL_OPTS=
+#
+# # dev f1: 0.888452 (4/10)
+# # online f1: 0.934097
+# # MODEL_TYPE=bert
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# # LEARNING_RATE=1e-5
+# # TRAIN_MAX_SEQ_LENGTH=32
+# # EVAL_MAX_SEQ_LENGTH=32
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # PREDICT_BATCH_SIZE=128
+# # TRAIN_RATE=0.9
+# # LOSS_TYPE=FocalLoss
+# # FOCALLOSS_GAMMA=1.5
+# # TRAIN_RATE=0.9
+# # EPOCHS=10
+#
+# # dev f1: 0.885146 (5/5)
+# # MODEL_TYPE=bert
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# # LEARNING_RATE=4e-5
+# # TRAIN_MAX_SEQ_LENGTH=32
+# # EVAL_MAX_SEQ_LENGTH=32
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # PREDICT_BATCH_SIZE=128
+# # TRAIN_RATE=0.9
+# # LOSS_TYPE=FocalLoss
+# # FOCALLOSS_GAMMA=1.5
+# # EPOCHS=5
+#
+# # dev f1: 0.877375
+# # online f1: 0.929196
+# # MODEL_TYPE=bert
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# # LEARNING_RATE=2e-5
+# # TRAIN_MAX_SEQ_LENGTH=32
+# # EVAL_MAX_SEQ_LENGTH=32
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # PREDICT_BATCH_SIZE=128
+# # TRAIN_RATE=0.9
+# # LOSS_TYPE=FocalLoss
+# # FOCALLOSS_GAMMA=1.5
+# # EPOCHS=10
+#
+# # dev f1:  0.9093 (7/10)
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=1e-5
+# # TRAIN_RATE=0.8
+#
+# # dev f1: 0.8887 (10/10)
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=1e-5
+# # TRAIN_RATE=0.7
+#
+# # dev f1: 0.9024 (7/10)
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-wwm-ext-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=2e-5
+# # dev f1: 0.9047 (7/10)
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-wwm-ext-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=3e-5
+#
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/albert-xlarge-183k-chinese
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/albert-base-v2-chinese
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-large-chinese
+# # dev f1: 0.8894 (9/10)
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-wwm-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=1e-5
+# #
+# # dev f1: 0.9290 (6/10)
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=8e-6
+# #
+# # dev f1: 0.9140 (9/10)
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/bert-base-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+# # LEARNING_RATE=3e-5
+#
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+# # TRAIN_BATCH_SIZE=128
+# # EVAL_BATCH_SIZE=128
+#
+# # PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-tiny-clue-chinese
+# # PRETRAINED_MODEL=clue/roberta_chinese_clue_tiny
+# # PRETRAINED_MODEL=voidful/albert_chinese_small
+#
+#
+#
+# DATASET_NAME=entity_typing
+# EXPERIMENT_NAME=ccks2020_entity_typing
+# TRACKING_URI=http://tracking.mlflow:5000
+# TRAIN_FILE=data/rawdata/ccks_7_1_competition_data/entity_type.txt
+# EVAL_FILE=data/rawdata/ccks_7_1_competition_data/entity_type.txt
+# TEST_FILE=data/rawdata/ccks_7_1_competition_data/entity_validation.txt
+# all:
+#     python run_${DATASET_NAME}.py --do_experiment
+#
+#         # --do_experiment \
+#         # --experiment_name ${EXPERIMENT_NAME} \
+#         # --tracking_uri ${TRACKING_URI} \
+#         # --train_file ${TRAIN_FILE} \
+#         # --eval_file ${EVAL_FILE} \
+#         # --test_file ${TEST_FILE} \
+#
+# train:
+#     python run_${DATASET_NAME}.py \
+#         --do_train \
+#         --experiment_name ${EXPERIMENT_NAME} \
+#         --tracking_uri ${TRACKING_URI} \
+#         --train_file ${TRAIN_FILE} \
+#
+#         # --train_max_seq_length ${TRAIN_MAX_SEQ_LENGTH} \
+#         # --num_train_epochs ${EPOCHS} \
+#         # --train_rate ${TRAIN_RATE} \
+#         # --learning_rate ${LEARNING_RATE} \
+#         # --per_gpu_train_batch_size ${TRAIN_BATCH_SIZE} \
+#         # --per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+#         # --data_dir ${DATA_DIR} \
+#         # --dataset_name ${DATASET_NAME} \
+#         # --fold ${FOLD} \
+#         # --train_file ${TRAIN_FILE} \
+#         # --output_dir ${OUTPUT_DIR} \
+#         # --model_type ${MODEL_TYPE} \
+#         # --model_path ${PRETRAINED_MODEL} \
+#         # --loss_type ${LOSS_TYPE} \
+#         # --focalloss_gamma ${FOCALLOSS_GAMMA} \
+#         # --cache_features \
+#         # --overwrite_cache \
+#         # ${ADDITIONAL_OPTS}
+#
+# eval:
+#     python run_${DATASET_NAME}.py \
+#         --do_eval \
+#         --learning_rate ${LEARNING_RATE} \
+#         --eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+#         --data_dir ${DATA_DIR} \
+#         --dataset_name ${DATASET_NAME} \
+#         --fold ${FOLD} \
+#         --eval_file ${EVAL_FILE} \
+#         --output_dir ${OUTPUT_DIR} \
+#         --model_type ${MODEL_TYPE} \
+#         --model_path ${CHECKPOINT_MODEL} \
+#         --per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+#         --cache_features
+# predict:
+#     python run_${DATASET_NAME}.py \
+#         --do_predict \
+#         --learning_rate ${LEARNING_RATE} \
+#         --eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+#         --per_gpu_predict_batch_size ${PREDICT_BATCH_SIZE} \
+#         --data_dir ${DATA_DIR} \
+#         --dataset_name ${DATASET_NAME} \
+#         --fold ${FOLD} \
+#         --test_file ${TEST_FILE} \
+#         --output_dir ${OUTPUT_DIR} \
+#         --model_type ${MODEL_TYPE} \
+#         --model_path ${CHECKPOINT_MODEL} \
+#
+# eda:
+#     python run_${DATASET_NAME}.py \
+#         --do_eda \
+#         --data_dir ${DATA_DIR} \
+#         --dataset_name ${DATASET_NAME} \
+#         --train_file ${TRAIN_FILE} \
+#         --test_file ${TEST_FILE} \
+#         --output_dir ${OUTPUT_DIR} \
+#
+# submit:
+#     python run_${DATASET_NAME}.py --do_submit

@@ -1,0 +1,148 @@
+DATASET_NAME=medical_entity
+all:
+	python run_${DATASET_NAME}.py \
+		--do_experiment \
+
+train:
+	python run_${DATASET_NAME}.py \
+		--do_train \
+
+eval:
+	python run_${DATASET_NAME}.py \
+		--do_eval \
+
+predict:
+	python run_${DATASET_NAME}.py \
+		--do_predict \
+
+eda:
+	python run_${DATASET_NAME}.py \
+		--do_eda \
+
+submit:
+	python run_${DATASET_NAME}.py \
+		--do_submit \
+
+# DATASET_NAME=medical_entity
+# DATA_DIR=./data
+#
+# #NER_TYPE=crf
+# NER_TYPE=span
+#
+# FOLD=0
+# OUTPUT_DIR=outputs
+# CHECKPOINT_MODEL=${OUTPUT_DIR}/latest/best
+# TRAIN_FILE= 'data/rawdata/ccks2020_2_task1_train/task1_train.txt'
+# EVAL_FILE= 'data/rawdata/ccks2020_2_task1_train/task1_train.txt'
+# TEST_FILE = 'data/rawdata/ccks2_task1_val/task1_no_val_utf8.txt'
+#
+#
+# EPOCHS=10
+# MODEL_TYPE=bert
+# PRETRAINED_MODEL=/opt/share/pretrained/pytorch/roberta-wwm-large-ext-chinese
+#
+# LEARNING_RATE=2e-5
+# TRAIN_MAX_SEQ_LENGTH=256
+# EVAL_MAX_SEQ_LENGTH=256
+# TRAIN_BATCH_SIZE=8
+# EVAL_BATCH_SIZE=8
+# PREDICT_BATCH_SIZE=64
+# SEG_LEN=254
+# SEG_BACKOFF=64
+# NUM_AUGEMENTS=2
+#
+# ADDITIONAL_OPTS=--enable_kd
+# #ADDITIONAL_OPTS=
+#
+# # ------------------------------------------------------------
+# DATASET_NAME=medical_entity
+# EXPERIMENT_NAME=ccks2020_medical_entity
+# TRACKING_URI=http://tracking.mlflow:5000
+# TRAIN_FILE= 'data/rawdata/ccks2020_2_task1_train/task1_train.txt'
+# EVAL_FILE= 'data/rawdata/ccks2020_2_task1_train/task1_train.txt'
+# TEST_FILE = 'data/rawdata/ccks2_task1_val/task1_no_val_utf8.txt'
+# NER_TYPE=span
+# all:
+#     NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+#         --do_experiment \
+#         --experiment_name ${EXPERIMENT_NAME} \
+#         --tracking_uri ${TRACKING_URI} \
+#         --train_file ${TRAIN_FILE} \
+#         --eval_file ${EVAL_FILE} \
+#         --test_file ${TEST_FILE} \
+#
+# train:
+#     NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+#         --do_train \
+#         --train_max_seq_length ${TRAIN_MAX_SEQ_LENGTH} \
+#         --num_train_epochs ${EPOCHS} \
+#         --learning_rate ${LEARNING_RATE} \
+#         --per_gpu_train_batch_size ${TRAIN_BATCH_SIZE} \
+#         --per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+#         --data_dir ${DATA_DIR} \
+#         --dataset_name ${DATASET_NAME} \
+#         --train_file ${TRAIN_FILE} \
+#         --eval_file ${EVAL_FILE} \
+#         --seg_len ${SEG_LEN} \
+#         --seg_backoff ${SEG_BACKOFF} \
+#         --num_augements ${NUM_AUGEMENTS} \
+#         --fold ${FOLD} \
+#         --output_dir ${OUTPUT_DIR} \
+#         --model_type ${MODEL_TYPE} \
+#         --model_path ${PRETRAINED_MODEL} \
+#         --do_lower_case \
+#         --overwrite_cache \
+#         ${ADDITIONAL_OPTS}
+#
+# eval:
+#     NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+#         --do_eval \
+#         --eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+#         --data_dir ${DATA_DIR} \
+#         --dataset_name ${DATASET_NAME} \
+#         --train_file ${TRAIN_FILE} \
+#         --eval_file ${EVAL_FILE} \
+#         --seg_len ${SEG_LEN} \
+#         --seg_backoff ${SEG_BACKOFF} \
+#         --fold ${FOLD} \
+#         --output_dir ${OUTPUT_DIR} \
+#         --model_type ${MODEL_TYPE} \
+#         --model_path ${CHECKPOINT_MODEL} \
+#         --per_gpu_eval_batch_size ${EVAL_BATCH_SIZE} \
+#         --do_lower_case \
+#         --overwrite_cache
+#
+# predict:
+#     NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+#         --do_predict \
+#         --eval_max_seq_length ${EVAL_MAX_SEQ_LENGTH} \
+#         --per_gpu_predict_batch_size ${PREDICT_BATCH_SIZE} \
+#         --data_dir ${DATA_DIR} \
+#         --dataset_name ${DATASET_NAME} \
+#         --test_file ${TEST_FILE} \
+#         --seg_len ${SEG_LEN} \
+#         --seg_backoff ${SEG_BACKOFF} \
+#         --output_dir ${OUTPUT_DIR} \
+#         --model_type ${MODEL_TYPE} \
+#         --model_path ${CHECKPOINT_MODEL} \
+#         --do_lower_case \
+#         --overwrite_cache
+# eda:
+#     NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+#         --do_eda \
+#         --train_max_seq_length ${TRAIN_MAX_SEQ_LENGTH} \
+#         --num_train_epochs ${EPOCHS} \
+#         --data_dir ${DATA_DIR} \
+#         --dataset_name ${DATASET_NAME} \
+#         --train_file ${TRAIN_FILE} \
+#         --test_file ${TEST_FILE} \
+#         --eval_file ${EVAL_FILE} \
+#         --fold ${FOLD} \
+#         --output_dir ${OUTPUT_DIR} \
+#         --overwrite_cache
+#
+# submission:
+#     NER_TYPE=${NER_TYPE} python run_${DATASET_NAME}.py \
+#         --do_submit \
+#         --dataset_name ${DATASET_NAME} \
+#         --output_dir ${OUTPUT_DIR} \
