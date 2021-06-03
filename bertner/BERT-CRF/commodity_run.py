@@ -52,6 +52,7 @@ def dev_split(dataset_dir):
     words = load_words(train_word_file)
     labels = load_labels(train_label_file)
     dataset = NERDataset(words, labels, config)
+    '''
     for i in range(len(dataset)):
         data_words, data_labels = dataset[i]
         if len(data_words[0]) != (len(data_labels) + 1):
@@ -68,6 +69,7 @@ def dev_split(dataset_dir):
             print(data_labels)
     import sys
     sys.exit(0)
+    '''
     x_train, x_dev, y_train, y_dev = train_test_split(words, labels, test_size=config.dev_split_size, random_state=0)
     return x_train, x_dev, y_train, y_dev
 
