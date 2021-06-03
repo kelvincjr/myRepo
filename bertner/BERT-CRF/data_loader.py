@@ -40,7 +40,7 @@ class NERDataset(Dataset):
             words = ['[CLS]'] + [item if item in self.w2i_char else '[UNK]' for token in words for item in token]
             #words = ['[CLS]'] + [item for token in words for item in token]
             token_start_idxs = 1 + np.cumsum([0] + word_lens[:-1])
-            sentences.append((self.tokenizer.convert_tokens_to_ids(words), words)) #token_start_idxs))
+            sentences.append((self.tokenizer.convert_tokens_to_ids(words), token_start_idxs))
         for tag in origin_labels:
             label_id = [self.label2id.get(t) for t in tag]
             labels.append(label_id)

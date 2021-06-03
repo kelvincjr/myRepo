@@ -5,10 +5,10 @@ data_dir = os.getcwd() + '/data/clue/'
 train_dir = data_dir + 'train.npz'
 test_dir = data_dir + 'test.npz'
 files = ['train', 'test']
-#bert_model = '/opt/kelvin/python/knowledge_graph/ai_contest/working'
-#roberta_model = '/opt/kelvin/python/knowledge_graph/ai_contest/working'
-bert_model = '/kaggle/working'
-roberta_model = '/kaggle/working'
+bert_model = '/opt/kelvin/python/knowledge_graph/ai_contest/working'
+roberta_model = '/opt/kelvin/python/knowledge_graph/ai_contest/working'
+#bert_model = '/kaggle/working'
+#roberta_model = '/kaggle/working'
 model_dir = os.getcwd() + '/experiments/commodity/'
 log_dir = model_dir + 'train.log'
 case_dir = os.getcwd() + '/case/bad_case.txt'
@@ -35,7 +35,7 @@ min_epoch_num = 5
 patience = 0.0002
 patience_num = 10
 
-gpu = ''
+gpu = '1'
 
 if gpu != '':
     device = torch.device(f"cuda:{gpu}")
