@@ -1,0 +1,8 @@
+B-品牌 I-品牌 I-品牌 B-品类 I-品类 I-品类 O O O O O O O B-材质 I-材质 O O O O O O O O O O B-材质 I-材质 O O O O O O
+B-品牌 I-品牌 I-品牌 O B-品牌 I-品牌 I-品牌 I-品牌 I-品牌 I-品牌 I-品牌 I-品牌 I-品牌 I-品牌 O O O O O O O O O O O O O O
+O O B-品牌 I-品牌 B-品牌 I-品牌 I-品牌 I-品牌 I-品牌 B-品类 I-品类 I-品类 O O O O O O O O O B-外壳材质 O O O O O O O O O O O O O O O O O O O O O O O O
+B-品牌 I-品牌 I-品牌 O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+B-品牌 I-品牌 I-品牌 I-品牌 I-品牌 I-品牌 O O O O O O O O O O O O O O O O O O O O O O O O O O O O O B-品类 I-品类 I-品类 O O O O O O O O O
+O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O B-类型 I-类型 I-类型 O O O O O O O O O O O O O O O O
+B-品牌 I-品牌 O O O B-适用季节 I-适用季节 O O O O O O O O O O O B-鞋面材质 I-鞋面材质 O O O O O O O O O O O B-鞋跟形状 I-鞋跟形状 O O O O B-靴筒高度 I-靴筒高度 O O O O O O B-尺码 I-尺码
+O O O O O O O O O O O O O O B-品类 I-品类 I-品类 O O O O B-类型 I-类型 I-类型 O O O O O O O O O O O O O O O B-适用场景 I-适用场景 O O O O O O O O O O O O O O O O O O O O B-适用场景 I-适用场景 O O O O O O O
