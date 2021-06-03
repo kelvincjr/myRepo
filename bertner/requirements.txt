@@ -44,7 +44,7 @@ torch==1.5.1
 torchvision==0.6.0a0+35d732a
 tqdm==4.52.0
 transformers==2.2.2
-urllib3==1.26.2
+urllib3==1.26.5
 Werkzeug==1.0.1
 wrapt==1.12.1
 zipp==3.4.0
