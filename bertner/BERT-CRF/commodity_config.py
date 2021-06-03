@@ -35,7 +35,7 @@ min_epoch_num = 5
 patience = 0.0002
 patience_num = 10
 
-gpu = '1'
+gpu = '0'
 
 if gpu != '':
     device = torch.device(f"cuda:{gpu}")
