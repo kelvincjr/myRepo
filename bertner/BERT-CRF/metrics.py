@@ -1,5 +1,6 @@
 import os
-import config
+#import config
+import commodity_config as config
 import logging
 
 

@@ -3,7 +3,8 @@ import logging
 import torch.nn as nn
 from tqdm import tqdm
 
-import config
+#import config
+import commodity_config as config
 from model import BertNER
 from metrics import f1_score, bad_case
 from transformers import BertTokenizer
@@ -78,7 +79,7 @@ def evaluate(dev_loader, model, mode='dev'):
     dev_losses = 0
 
     with torch.no_grad():
-        for idx, batch_samples in enumerate(dev_loader):
+        for idx, batch_samples in enumerate(tqdm(dev_loader)):
             batch_data, batch_token_starts, batch_tags = batch_samples
             if mode == 'test':
                 sent_data.extend([[tokenizer.convert_ids_to_tokens(idx.item()) for idx in indices
