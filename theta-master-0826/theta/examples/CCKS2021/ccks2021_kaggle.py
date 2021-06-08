@@ -27,14 +27,16 @@ def load_data(filename):
             level2 = l['level2']
             level3 = l['level3']
             attributes = []
-            for attr in l['attributes']:
-                start = int(attr['start'])
-                end = int(attr['end'])
-                entity = attr['entity']
-                en_type = attr['type']
-                type_set.add(level1 + "_" + level2 + "_" + level3 + "_" + en_type)
-                value = (start, end, en_type, entity)
-                attributes.append(value)
+            if 'attributes' in l:
+                for attr in l['attributes']:
+                        start = int(attr['start'])
+                        end = int(attr['end'])
+                        entity = attr['entity']
+                        en_type = attr['type']
+                        en_type = level1 + "_" + level2 + "_" + level3 + "_" + en_type
+                        type_set.add(en_type)
+                        value = (start, end, en_type, entity)
+                        attributes.append(value)
             D.append((l['text'], level1, level2, level3, attributes))
     return D, type_set
 
