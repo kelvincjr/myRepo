@@ -33,11 +33,11 @@ def load_data(filename):
                         end = int(attr['end'])
                         entity = attr['entity']
                         en_type = attr['type']
-                        en_type = level1 + "_" + level2 + "_" + level3 + "_" + en_type
-                        type_set.add(en_type)
+                        temp = level1 + "_" + level2 + "_" + level3 + "_" + en_type
+                        type_set.add(temp)
                         value = (start, end, en_type, entity)
                         attributes.append(value)
-            D.append((l['text'], level1, level2, level3, attributes))
+            D.append((l['text'], l['text_id'], level1, level2, level3, attributes))
     return D, type_set
 
 D, type_set = load_data(train_file)
@@ -79,13 +79,13 @@ def train_data_generator(train_file):
     data, _ = load_data(train_file)
 
     for i, x in enumerate(tqdm(data)):
-        guid = str(i)
+        guid = x[1]
         text = clean_text(x[0])
-        level1 = x[1]
-        level2 = x[2]
-        level3 = x[3]
+        level1 = x[2]
+        level2 = x[3]
+        level3 = x[4]
         sl = LabeledText(guid, text)
-        entities = x[4]
+        entities = x[5]
         for entity in entities:
             c = level1 + "_" + level2 + "_" + level3 + "_" + entity[2]
             x0 = int(entity[0])
@@ -155,7 +155,7 @@ def test_data_generator(test_file):
 
     data, _ = load_data(test_file)
     for i, x in enumerate(tqdm(data)):
-        guid = str(i)
+        guid = x[1]
         text_a = clean_text(x[0])
 
         yield guid, text_a, None, None
