@@ -30,7 +30,7 @@ from ..trainer import Trainer, get_default_optimizer_parameters
 from ...utils.multiprocesses import barrier_leader_process, barrier_member_processes, is_multi_processes
 
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
-from transformers import AutoConfig, BertTokenizerFast, AutoModelForTokenClassification
+from transformers import AutoConfig, BertConfig, BertTokenizerFast, AutoModelForTokenClassification
 from transformers.modeling_bert import BertPreTrainedModel, BertModel
 
 CRF_TYPE = "old_crf"
