@@ -431,7 +431,8 @@ class BertCrfForNer(BertPreTrainedModel):
 #          return outputs  # (loss), scores
 
 MODEL_CLASSES = {
-    'bert': (AutoConfig, BertCrfForNer, CNerTokenizer),
+    'bert': (BertConfig, BertCrfForNer, CNerTokenizer),
+    #'bert': (AutoConfig, BertCrfForNer, CNerTokenizer),
     #  'bert': (AutoConfig, AutoModelForTokenClassification, CNerTokenizer),
     #  'albert': (AlbertConfig, AlbertCrfForNer, CNerTokenizer),
     #  'xlnet': (XLNetConfig, XLNetCrfForNer, CNerTokenizer),
