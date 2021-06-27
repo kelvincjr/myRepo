@@ -16,6 +16,17 @@ fold = 0
 
 train_file = r'/kaggle/working/thetamaster3/theta-master-0826/theta/examples/CCKS2021/data/ccks_task1_train.txt'
 eval_file = r'/kaggle/working/thetamaster3/theta-master-0826/theta/examples/CCKS2021/data/ccks_task1_eval_data.txt'
+training_args_file = r'/kaggle/working/training_args.json'
+
+def load_ner_labels(filename):
+    ner_labels = list()
+    with open(filename, encoding='utf-8') as f:
+        #content = f.readlines()
+        #print(content)
+        l = json.load(f)
+        ner_labels = l['ner_labels']
+    #ner_labels = ner_labels[3:]
+    return ner_labels
 
 def load_data(filename):
     D = []
@@ -41,7 +52,8 @@ def load_data(filename):
     return D, type_set
 
 D, type_set = load_data(train_file)
-ner_labels = list(type_set)
+#ner_labels = list(type_set)
+ner_labels = load_ner_labels(training_args_file)
 print(ner_labels)
 print("labels len: ", len(ner_labels))
 '''
