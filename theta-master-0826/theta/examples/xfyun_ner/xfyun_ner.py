@@ -24,6 +24,8 @@ def load_ner_train_data(filename):
     id_ = 0
     total_entities = 0
     total_spos = 0
+    max_text_len = 0
+    long_text_num = 0
     #predicate_counter = defaultdict(int)
     ner_counter = defaultdict(int)
     with open(filename, encoding='utf-8') as f:
@@ -33,7 +35,15 @@ def load_ner_train_data(filename):
                 break
             data = json.loads(l)
             sent = data['sent']
+            #print('sent1 {}'.format(sent))
+            sent = sent.replace(' ', '')
+            #print('sent2 {}'.format(sent))
             ners = data['ners']
+            text_len = len(sent)
+            if text_len > 256:
+                long_text_num += 1
+            if text_len > max_text_len:
+                max_text_len = text_len
             guid = id_
             #print('id {}, sent {}'.format(id_, sent))
             entities = []
@@ -63,7 +73,7 @@ def load_ner_train_data(filename):
     sorted_ner = sorted(ner_counter.items(), key=lambda x: x[1], reverse=True)
     for s_ner, count in sorted_ner:
         print('{}, {}'.format(s_ner, count))  
-    print('total entity num: {}, spo num: {}'.format(total_entities, total_spos))
+    print('total entity num: {}, spo num: {}, max text len: {}, long text num: {}'.format(total_entities, total_spos, max_text_len, long_text_num))
     return D
 
 def load_ner_test_data(filename):
@@ -268,17 +278,17 @@ experiment_params = NerAppParams(
         eval_file=None,
         test_file=test_file,#test_spo_file,
         learning_rate=2e-5,
-        train_max_seq_length=512,
-        eval_max_seq_length=512,
-        per_gpu_train_batch_size=4,
-        per_gpu_eval_batch_size=4,
-        per_gpu_predict_batch_size=4,
+        train_max_seq_length=256,
+        eval_max_seq_length=256,
+        per_gpu_train_batch_size=16,
+        per_gpu_eval_batch_size=16,
+        per_gpu_predict_batch_size=16,
         #per_gpu_train_batch_size=16,
         #per_gpu_eval_batch_size=16,
         #per_gpu_predict_batch_size=16,
         seg_len=510,
         seg_backoff=128,
-        num_train_epochs=10,
+        num_train_epochs=2,
         fold=0,
         num_augements=0,
         enable_kd=False,
