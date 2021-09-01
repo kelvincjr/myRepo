@@ -91,7 +91,7 @@ def load_ner_test_data(filename):
     return D
         
 
-#load_ner_train_data(train_file)
+load_ner_train_data(train_file)
 print(ner_labels)
 '''
 train_data = load_data(train_file)
@@ -103,8 +103,8 @@ ner_labels = [
 ]
 '''
 print('======================= done ==============================')
-#import sys
-#sys.exit()
+import sys
+sys.exit()
 
 import os, sys, json, random
 from collections import Counter
@@ -288,7 +288,7 @@ experiment_params = NerAppParams(
         #per_gpu_predict_batch_size=16,
         seg_len=510,
         seg_backoff=128,
-        num_train_epochs=3,
+        num_train_epochs=10,
         fold=0,
         num_augements=0,
         enable_kd=False,
