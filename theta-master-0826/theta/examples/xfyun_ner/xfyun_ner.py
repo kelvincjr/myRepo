@@ -56,8 +56,8 @@ def load_ner_train_data(filename):
                 ner_counter[ner_type] += 1
                 entities.append((ner_type, start_index, end_index))
                 #entities = list(set(entities))
-                D.append((guid, sent, entities))
                 total_entities += 1
+            D.append((guid, sent, entities))
             id_ += 1
             l = f.readline()
             while l.startswith('[') or l.startswith('{'):
@@ -288,7 +288,7 @@ experiment_params = NerAppParams(
         #per_gpu_predict_batch_size=16,
         seg_len=510,
         seg_backoff=128,
-        num_train_epochs=2,
+        num_train_epochs=3,
         fold=0,
         num_augements=0,
         enable_kd=False,
