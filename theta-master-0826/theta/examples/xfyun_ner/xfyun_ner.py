@@ -91,7 +91,7 @@ def load_ner_test_data(filename):
     return D
         
 
-load_ner_train_data(train_file)
+#load_ner_train_data(train_file)
 print(ner_labels)
 '''
 train_data = load_data(train_file)
@@ -103,8 +103,8 @@ ner_labels = [
 ]
 '''
 print('======================= done ==============================')
-import sys
-sys.exit()
+#import sys
+#sys.exit()
 
 import os, sys, json, random
 from collections import Counter
