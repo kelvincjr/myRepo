@@ -36,7 +36,7 @@ scipy @ file:///tmp/build/80754af9/scipy_1597686625380/work
 sentencepiece==0.1.94
 six @ file:///tmp/build/80754af9/six_1605205335545/work
 tensorboard==1.15.0
-tensorflow==1.15.0
+tensorflow==2.6.4
 tensorflow-estimator==1.15.1
 termcolor==1.1.0
 threadpoolctl @ file:///tmp/tmp9twdgx9k/threadpoolctl-2.1.0-py3-none-any.whl
