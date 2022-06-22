@@ -20,7 +20,7 @@ Markdown==3.3.3
 mkl-fft==1.2.0
 mkl-random==1.1.1
 mkl-service==2.3.0
-numpy==1.19.4
+numpy==1.22.0
 olefile==0.46
 opt-einsum==3.3.0
 Pillow @ file:///tmp/build/80754af9/pillow_1603822238230/work
